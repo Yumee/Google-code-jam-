@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class Pro {
+	private static String path = "F:\\match\\CodeJam\\02-Reverse Words\\B-small-practice.in";
+	private static String path2 = "F:\\match\\CodeJam\\02-Reverse Words\\B-small-practice-out.txt";
+	static PrintWriter writer ;
+	private static String[] res = null;
+	private static String[] res2 = null;
+	public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+		File f = new File(path);
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(f));
+			int lines;
+			String context ,result = "";
+			lines = Integer.parseInt( reader.readLine());
+			System.out.println(lines);
+			res2 = new String[lines] ;
+			for (int i = 0; i < lines; i++) {
+				context = reader.readLine();
+				System.out.println(context);
+				for (int j = context.length()-1; j >-1 ; j--) {
+					res = context.split(" ");
+				}
+//				System.out.println("length "+res.length);
+				for (int j = res.length-1; j > -1 ; j--) {
+					System.out.print(res[j]+" ");
+					result += res[j]+" " ;
+				}
+				res2[i] = "Case #"+(i+1)+": "+result ;
+				result= "";
+				System.out.println("");
+			}
+			writeToFile(path2);
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+	public static void writeToFile(String path){
+		File file = new File(path);
+		try {
+			writer = new PrintWriter(new FileWriter(file));
+			for (int i = 0; i < res2.length; i++) {
+				writer.println(res2[i]);
+			}
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+}
